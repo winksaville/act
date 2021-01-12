@@ -68,6 +68,21 @@ func runTestJobFile(ctx context.Context, t *testing.T, tjfi TestJobFileInfo) {
 	})
 }
 
+func TestSetEnvVar(t *testing.T) {
+	platforms := map[string]string{
+		"ubuntu-latest": "node:12.6-buster-slim",
+	}
+	runTestJobFile(context.Background(), t,
+		TestJobFileInfo{
+			"testdata",
+			"local-action-set-env-var",
+			"push",
+			"",
+			platforms,
+		},
+	)
+}
+
 func TestRunEvent(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test")
